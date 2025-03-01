@@ -1,142 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Web App Calendar</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Events</title>
 </head>
-<body class="bg-gray-100">
-  <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold text-center mb-4">
-      Calendar: Mar 1, 2025 - Jan 29, 2027
-    </h1>
-    <div id="calendar" class="grid grid-cols-7 gap-2"></div>
-  </div>
 
-  <script>
-    // Define your events array
-    const events = [
-      {
-        title: "Front-end Web Development Completed",
-        description: "Must be fluent in English Inshallah.",
-        date: "2025-05-31",
-        type: "deadline",
-      },
-      {
-        title: "Preparation for Front-end Developer Position",
-        description: "Preparation period Inshallah.",
-        start: "2025-06-01",
-        end: "2025-06-30",
-        type: "range",
-      },
-      {
-        title: "Secure a Front-end Developer Position",
-        description: "Deadline Inshallah.",
-        date: "2025-07-01",
-        type: "deadline",
-      },
-      {
-        title: "Full Stack Development",
-        description: "Development period Inshallah.",
-        start: "2025-06-01",
-        end: "2025-11-30",
-        type: "range",
-      },
-      {
-        title: "Preparation for Full-stack Developer Position",
-        description: "Preparation period Inshallah.",
-        start: "2025-12-01",
-        end: "2025-12-31",
-        type: "range",
-      },
-      {
-        title: "Secure a Full-stack Developer Position",
-        description: "Deadline Inshallah.",
-        date: "2026-01-01",
-        type: "deadline",
-      },
-      {
-        title: "Start AI Engineering Studies",
-        description: "Continuing learning thereafter Inshallah.",
-        date: "2026-01-01",
-        type: "deadline",
-      },
-      {
-        title: "Develop AI Products",
-        description: "Build AI SaaS and AI agents while learning Inshallah.",
-        date: "2026-01-01",
-        type: "ongoing",
-      },
-      {
-        title: "Launch Exceptional AI Startup",
-        description: "Address real-life problems and generate revenue Inshallah.",
-        date: "2027-01-01",
-        type: "deadline",
-      },
-      {
-        title: "Speak with Someone Special",
-        description: "The most significant day of my life Inshallah.",
-        date: "2027-01-29",
-        type: "deadline",
-      },
-    ];
+<body>
+    <h1>Dom Doma dom dom Events</h1>
+    <!-- option 1 for event handler -->
+    <button onclick="console.log(7)">Click me</button>
+    <button onclick="console.log(63)">Another button</button>
+    <button id="" onclick="console.log('i am clicked')">third button</button>
+    <input type="text">
+    <br>
+    <!-- option 2 for click event handler -->
+    <button onclick="makeYellow()">Make Yellow</button>
+    <button onclick="makeRed()">Make Red</button>
+    <br>
+    <!-- option 3: get element by id and then set onclick to a function -->
+    <button id="btn-make-blue">Make Blue</button>
+    <button id="btn-make-purple">Make Purple</button>
+    
 
-    // Helper: Format a Date object as 'YYYY-MM-DD'
-    function formatDate(date) {
-      return date.toISOString().split("T")[0];
-    }
+    <br>
+    <!-- option 4: addEventListener -->
+    <button id="btn-make-green">Make Green</button>
+    <button id="btn-make-gold">Make gold</button>
+    <script>
+        // document.getElementById().addEventListener('event type', handler)
 
-    // Helper: Get events for a given day (by comparing date strings)
-    function getEventsForDay(day) {
-      const dayStr = formatDate(day);
-      return events.filter(event => {
-        if (event.type === "deadline" || event.type === "ongoing") {
-          return event.date === dayStr;
-        } else if (event.type === "range") {
-          return dayStr >= event.start && dayStr <= event.end;
-        }
-        return false;
-      });
-    }
+        // document.getElementById('btn-make-green').addEventListener('click', function makeGreen() {
 
-    // Set calendar start and end dates
-    const startDate = new Date("2025-03-01");
-    const endDate = new Date("2027-01-29");
-    const oneDay = 24 * 60 * 60 * 1000;
-    const calendarContainer = document.getElementById("calendar");
+        // })
 
-    // Generate the calendar days
-    for (let current = new Date(startDate); current <= endDate; current = new Date(current.getTime() + oneDay)) {
-      const dayCell = document.createElement("div");
-      dayCell.className = "bg-white border p-2 rounded shadow relative min-h-[80px]";
+        document.getElementById('btn-make-green').addEventListener('click', function makeGreen() {
+            document.body.style.backgroundColor = 'green';
+        })
 
-      // Day number (date)
-      const dayNumber = document.createElement("div");
-      dayNumber.className = "font-bold";
-      dayNumber.textContent = current.getDate();
-      dayCell.appendChild(dayNumber);
+        document.getElementById('btn-make-gold')
+            .addEventListener('click', function (){
+                document.body.style.backgroundColor = 'goldenrod'
+            })
 
-      // Mark final day (Jan 29, 2027) with a cross symbol
-      if (formatDate(current) === "2027-01-29") {
-        const cross = document.createElement("div");
-        cross.className = "absolute top-1 right-1 text-red-500 text-xl";
-        cross.textContent = "✖";
-        dayCell.appendChild(cross);
-      }
-
-      // Append any events for this day as badges
-      const dayEvents = getEventsForDay(current);
-      dayEvents.forEach(event => {
-        const eventBadge = document.createElement("div");
-        eventBadge.className = "mt-1 bg-blue-200 text-blue-800 text-xs rounded px-1";
-        eventBadge.textContent = event.title;
-        dayCell.appendChild(eventBadge);
-      });
-
-      calendarContainer.appendChild(dayCell);
-    }
-  </script>
+    </script>
+    <script src="js/events.js"></script>
 </body>
+
 </html>
